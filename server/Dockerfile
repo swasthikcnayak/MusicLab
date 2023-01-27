@@ -1,13 +1,14 @@
 FROM node:19.5.0
 
-WORKDIR /
+WORKDIR /src
 COPY package*.json /
 
 RUN npm install
 RUN npm ci --only=production
 
 COPY . .
-EXPOSE 8080
+EXPOSE 3000
+RUN cd src
 CMD [ "node", "server.js" ]
 
 
