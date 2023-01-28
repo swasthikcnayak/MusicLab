@@ -41,7 +41,6 @@ export default async (req, res) => {
     req.body.email,
     req.body.name,
     emailCode,
-    req.body.language,
     "register",
     req,
     res
@@ -88,7 +87,7 @@ export default async (req, res) => {
 
   logger("00035", user._id, getText("en", "00035"), "Info", req);
   return res.status(200).json({
-    resultMessage: { en: getText("en", "00035"), tr: getText("tr", "00035") },
+    resultMessage: { en: getText("en", "00035") },
     resultCode: "00035",
     user,
     confirmToken: confirmCodeToken,

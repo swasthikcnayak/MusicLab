@@ -57,7 +57,7 @@ export default async (req, res) => {
     const params = {
       Bucket: bucketName,
       Key:
-        turkishToEnglish(user.name).replace(/\s/g, "").toLowerCase() +
+        user.name.replace(/\s/g, "").toLowerCase() +
         "/" +
         user._id +
         "/" +
@@ -89,7 +89,7 @@ export default async (req, res) => {
     //NOTE: The only thing we should send to the front is the url of the uploaded photo. Front-end knows all other changes.
     logger("00086", req.user._id, getText("en", "00086"), "Info", req);
     return res.status(200).json({
-      resultMessage: { en: getText("en", "00086"), tr: getText("tr", "00086") },
+      resultMessage: { en: getText("en", "00086") },
       resultCode: "00086",
       photoUrl: user.photoUrl,
     });

@@ -15,9 +15,9 @@ config.update({
   region: awsRegion,
 });
 
-export default async (email, name, confirmCode, lang, type, req, res) => {
+export default async (email, name, confirmCode, type, req, res) => {
   new Promise(async (resolve, reject) => {
-    if (!email || !confirmCode || (lang !== "tr" && lang !== "en")) {
+    if (!email || !confirmCode) {
       return res.status(400).send(errorHelper("00005", req)).end();
     }
 

@@ -85,7 +85,6 @@ export default (app) => {
     return res.json({
       resultMessage: {
         en: error.message,
-        tr: error.message,
       },
       resultCode: resultCode,
     });

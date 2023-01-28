@@ -1,28 +1,40 @@
-import { Token } from "../../../../models/index.js";
+import {
+  spotify_client_id,
+  base_url,
+  spotify_auth_url,
+  spotify_scopes,
+} from "../../../../config/index.js";
 import { errorHelper, getText, logger } from "../../../../utils/index.js";
 
 export default async (req, res) => {
-  await Token.updateOne(
-    { userId: req.user._id },
-    {
-      $set: { status: false, expiresIn: Date.now() },
-    }
-  ).catch((err) => {
-    return res.status(500).json(errorHelper("00049", req, err.message));
-  });
+  var state = generateRandomString(16);
+  res
+    .redirect(
+      "https://accounts.spotify.com/authorize?" +
+        querystring.stringify({
+          response_type: "code",
+          client_id: client_id,
+          scope: scope,
+          redirect_uri: redirect_uri,
+          state: state,
+        })
+    )
+    .catch((err) => {
+      return res.status(500).json(errorHelper("00049", req, err.message));
+    });
 
-  logger("00050", req.user._id, getText("en", "00050"), "Info", req);
+  logger("00093", req.user._id, getText("en", "00050"), "Info", req);
   return res.status(200).json({
     resultMessage: { en: getText("en", "00050") },
-    resultCode: "00050",
+    resultCode: "00093",
   });
 };
 
 /**
  * @swagger
- * /user/logout:
- *    post:
- *      summary: Logout the User
+ * /spotify/login:
+ *    get:
+ *      summary: Authenticate the application for using spotify credentials
  *      parameters:
  *        - in: header
  *          name: Authorization

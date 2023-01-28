@@ -30,7 +30,6 @@ export default async (req, res) => {
     req.body.email,
     user.name,
     emailCode,
-    user.language,
     "newCode",
     req,
     res
@@ -45,7 +44,7 @@ export default async (req, res) => {
   const confirmCodeToken = signConfirmCodeToken(user._id, emailCode);
   logger("00048", user._id, getText("en", "00048"), "Info", req);
   return res.status(200).json({
-    resultMessage: { en: getText("en", "00048"), tr: getText("tr", "00048") },
+    resultMessage: { en: getText("en", "00048") },
     resultCode: "00048",
     confirmToken: confirmCodeToken,
   });
