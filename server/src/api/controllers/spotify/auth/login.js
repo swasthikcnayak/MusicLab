@@ -1,31 +1,15 @@
-import {
-  spotify_client_id,
-  base_url,
-  spotify_auth_url,
-  spotify_scopes,
-} from "../../../../config/index.js";
+import { spotify_scopes } from "../../../../config/index.js";
 import { errorHelper, getText, logger } from "../../../../utils/index.js";
+import spotifyAPI from "../spotifyAPI.js";
 
 export default async (req, res) => {
-  var state = generateRandomString(16);
-  res
-    .redirect(
-      "https://accounts.spotify.com/authorize?" +
-        querystring.stringify({
-          response_type: "code",
-          client_id: client_id,
-          scope: scope,
-          redirect_uri: redirect_uri,
-          state: state,
-        })
-    )
-    .catch((err) => {
-      return res.status(500).json(errorHelper("00049", req, err.message));
-    });
+  res.redirect(spotifyAPI.createAuthorizeURL(spotify_scopes)).catch((err) => {
+    return res.status(500).json(errorHelper("00049", req, err.message));
+  });
 
-  logger("00093", req.user._id, getText("en", "00050"), "Info", req);
+  logger("00093", req.user._id, getText("en", "00093"), "Info", req);
   return res.status(200).json({
-    resultMessage: { en: getText("en", "00050") },
+    resultMessage: { en: getText("en", "00093") },
     resultCode: "00093",
   });
 };

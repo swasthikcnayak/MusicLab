@@ -2,7 +2,6 @@ import logger from "../logger.js";
 import en from "../lang/en.js";
 
 export default (code, req, errorMessage) => {
-  //NOTE: This control routes every server error to the same lang key.
   let key = code;
   if (!en[code]) key = "00008";
 

@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { login } from "../controllers/spotify/index.js";
+import { login, callback, refreshToken } from "../controllers/spotify/index.js";
 
 const router = Router();
 
 // AUTH
-router.post("/login", login);
-
+router.get("/login", login);
+router.get("/callback", callback);
+router.get("/refresh_token", refreshToken);
 //PLAYLIST FETCH
 
 //PLAYLIST PUT

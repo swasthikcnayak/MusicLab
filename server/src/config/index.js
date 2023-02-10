@@ -29,6 +29,11 @@ export const bucketName = BUCKET_NAME || "a";
 export const prefix = "/api";
 export const specs = "/docs";
 export const base_url = BASE_URL || "http://localhost:" + port;
+
+
 export const spotify_client_id = SPOTIFY_CLIENT_ID || "a";
 export const spotify_auth_url = "https://accounts.spotify.com/authorize?";
-export const spotify_scopes = "user-read-private user-read-email";
+export const spotify_scopes = ["user-read-private, user-read-email"];
+export const spotify_token_url = "https://accounts.spotify.com/api/token";
+export const spotify_client_secret = "adsfs";
+export const spotify_redirect_uri = base_url + "/spotify/callback"
